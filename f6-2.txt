@@ -1,0 +1,60 @@
+import RPi.GPIO as GPIO
+import time
+BUZZER = 12
+SW1 = 5 # 4개의 스위치
+SW2 = 6
+SW3 = 13
+SW4 = 19
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUZZER,GPIO.OUT)
+GPIO.setup(SW1,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(SW2,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(SW3,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(SW4,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+p1= GPIO.PWM(BUZZER,sw1F) #스위치 1번의 주파수로 소리나게 설정
+p2= GPIO.PWM(BUZZER,sw2F) #스위치 2번의 주파수로 소리나게 설정
+p3= GPIO.PWM(BUZZER,sw3F) #스위치 3번의 주파수로 소리나게 설정
+p4= GPIO.PWM(BUZZER,sw4F) #스위치 4번의 주파수로 소리나게 설정
+ 
+sw1F=262 # 스위치1번을 도 음으로 주파수 설정
+sw2F=294 # 스위치2번을 레 음으로 주파수 설정
+sw3F=330 # 스위치3번을 미 음으로 주파수 설정
+sw4F=392 # 스위치4번을 솔 음으로 주파수 설정
+
+p.start(50)
+try:
+	while True
+		
+		sw1Value = GPIO.input(SW1) # 스위치가 눌리면 3.3V의 신호가 GPIO로 입력됨
+		if sw1Value = true: # 스위치 1번이 눌리면
+		p.ChangeFrequency(sw1F) # 스위치 1번의 주파수로 변경
+		p1.start(50) #50 듀티사이클로 시작
+		time.sleep(0.1) 
+		p1.stop() 
+
+		sw2Value = GPIO.input(SW2) 
+		if sw2Value = true: # 스위치 2번이 눌리면
+		p.ChangeFrequency(sw2F)
+		p2.start(50)
+		time.sleep(0.1)
+		p2.stop()
+		
+		sw3Value = GPIO.input(SW3) 
+		if sw3Value = true: # 스위치 3번이 눌리면
+		p.ChangeFrequency(sw3F)
+		p3.start(50)
+		time.sleep(0.1)
+		p3.stop()
+		
+		sw4Value = GPIO.input(SW4) 
+		if sw4Value = true: # 스위치 4번이 눌리면
+		p.ChangeFrequency(sw4F)
+		p4.start(50)
+		time.sleep(0.1)
+		p4.stop()
+		
+except KeyboardInterrupt:
+	pass
+
+GPIO.cleanup()

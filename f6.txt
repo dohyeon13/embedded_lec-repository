@@ -1,0 +1,44 @@
+import RPi.GPIO as GPIO
+import time
+SW1 = 5 # 4개의 스위치
+SW2 = 6
+SW3 = 13
+SW4 = 19
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SW1,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(SW2,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(SW3,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(SW4,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+count1 = 0 # 스위치 1번 누른횟수의 초기값
+count2 = 0 # 스위치 2번 누른횟수의 초기값
+count3 = 0 # 스위치 3번 누른횟수의 초기값   
+count4 = 0 # 스위치 4번 누른횟수의 초기값
+
+try :
+    while True:
+        sw1Value = GPIO.input(SW1) # 스위치가 눌리면 3.3V의 신호가 GPIO로 입력됨
+        if sw1Value==True: # 스위치1번이 눌리면
+            count1 = count1 +1 # count1에 1회 추가
+            print("'SW1 click'",count1) # GPIO 후 값 저장
+        time.sleep(0.1)
+        sw2Value = GPIO.input(SW2)
+        if sw2Value==True: # 스위치 2번이 눌리면
+            count2 = count2 +1 
+            print("'SW2 click'",count2)
+        time.sleep(0.1)
+        sw3Value = GPIO.input(SW3)
+ 
+        if sw3Value==True: # 스위치 3번이 눌리면
+            count3 = count3 +1 
+            print("'SW3 click'",count3)
+        time.sleep(0.1)
+        sw4Value = GPIO.input(SW4) 
+        if sw4Value==True: # 스위치 4번이 눌리면
+            count4 = count4 +1 
+            print("'SW4 click'",count4)
+        time.sleep(0.1)
+except KeyboardInterrupt:
+    pass
+
+GPIO.cleanup()

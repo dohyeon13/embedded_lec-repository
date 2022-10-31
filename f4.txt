@@ -1,0 +1,32 @@
+import RPi.GPIO as GPIO # RPi.GPIO 모듈을 GPIO라는 이름으로 사용
+import time # time모듈 사용
+
+GPIO.setmode(GPIO.BOARD) # GPIO핀 모드를 Board로 하여
+GPIO.setup(36,GPIO.OUT) # Board에서 36번인 16번 핀을 GPIO출력으로 설정
+GPIO.setup(40,GPIO.OUT) # Board에서 40번인 21번 핀을 GPIO출력으로 설정
+GPIO.setup(38,GPIO.OUT) # Board에서 38번인 20번 핀을 GPIO출력으로 설정
+GPIO.setup(37,GPIO.OUT) # Board에서 37번인 26번 핀을 GPIO출력으로 설정
+
+try: # 할단된 핀을 reset하기 위해 try~except 구문 사용
+    while(True): # 시계방향으로 36-40-38-37순으로 점등 소등
+        GPIO.output(36,True) # 36번 핀을 점등 
+        time.sleep(1.0)    # 1초동안
+        GPIO.output(36,False) # 36번 핀을 소등
+        time.sleep(1.0) # 1초동안
+    
+        GPIO.output(40,True)	#40번 핀을 점등 	
+        time.sleep(1.0)		# 1초동안
+        GPIO.output(40,False)	#40번 핀을 소등 
+        time.sleep(1.0)		# 1초동안
+
+        GPIO.output(38,True)	# 38번 핀을 점등 
+        time.sleep(1.0)		# 1초동안
+        GPIO.output(38,False)	# 38번 핀을 소등 
+        time.sleep(1.0)		# 1초동안
+    
+        GPIO.output(37,True)   # 37번 핀을 점등 
+        time.sleep(1.0)		# 1초동안
+        GPIO.output(37,False)	# 37번 핀을 소등 
+        time.sleep(1.0)		# 1초동안
+except : # try~except 구문을 사용하여 ctrl+c 입력으로 종료되어 LED를 모두 끄고 핀을 reset
+ GPIO.cleanup() # 할당된 핀 reset
